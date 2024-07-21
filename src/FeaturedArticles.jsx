@@ -8,16 +8,14 @@ const FeaturedArticles = () => {
       <h1 className="text-center text-5xl my-4 font-bold">Featured Articles</h1>
       <div className="flex justify-between mx-12">
         {featuredArticles.map((article, index) => (
-          <div>
-            <Article
-              key={index}
-              title={article.title}
-              imageSource={article.image}
-              description={article.description}
-              rating={article.rating}
-              author={article.author}
-            />
-          </div>
+          <Article
+            key={index}
+            title={article.title}
+            imageSource={article.image}
+            description={article.description}
+            rating={article.rating}
+            author={article.author}
+          />
         ))}
       </div>
       <div className="flex justify-center">

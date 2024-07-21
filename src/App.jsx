@@ -1,20 +1,20 @@
-import { useState } from "react";
+import Home from "./routes/Home";
+import Login from "./routes/Login";
+import { Route, Routes } from "react-router-dom";
+import NewPostPage from "./routes/NewPostPage";
+import Register from "./routes/Register";
 import Header from "./Header";
-import HeadingImage from "./HeadingImage";
-import FeaturedArticles from "./FeaturedArticles";
-import FeaturedTutorials from "./FeaturedTutorials";
-import SignUp from "./SignUp";
-import Footer from "./Footer";
 
 function App() {
   return (
     <>
       <Header />
-      <HeadingImage />
-      <FeaturedArticles />
-      <FeaturedTutorials />
-      <SignUp />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/post" element={<NewPostPage />} />
+      </Routes>
     </>
   );
 }
