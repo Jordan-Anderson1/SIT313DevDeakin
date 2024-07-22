@@ -1,12 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { signIn } = UserAuth();
+
+  const navigate = useNavigate();
+
   const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
-    console.log({ loginInfo });
+    try {
+      await signIn(loginInfo.email, loginInfo.password);
+      navigate("/");
+    } catch (e) {
+      console.log("error");
+    }
+
     setLoginInfo({ email: "", password: "" });
   };
 

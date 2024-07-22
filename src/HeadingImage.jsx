@@ -1,6 +1,8 @@
 import React from "react";
+import { UserAuth } from "./context/AuthContext";
 
 const HeadingImage = () => {
+  const { user } = UserAuth();
   return (
     <>
       <div className="relative w-full h-[400px]">
@@ -9,6 +11,11 @@ const HeadingImage = () => {
           alt="code on a screen"
           className="w-full h-full object-cover"
         />
+        {user && (
+          <p className="absolute top-1/2 text-3xl text-white left-1/3">
+            welcome {user.email}
+          </p>
+        )}
         <div className="absolute bottom-0 right-0 bg-gray-500 px-2">
           <p>
             Image by{" "}
