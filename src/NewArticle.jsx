@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import RenderTags from "./RenderTags";
 import EnterTags from "./EnterTags";
+import { addNewArticle, uploadImage } from "./utils/firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const NewArticle = ({ setSubmitted }) => {
   const [tags, setTags] = useState([]);
@@ -8,10 +10,20 @@ const NewArticle = ({ setSubmitted }) => {
   const [title, setTitle] = useState("");
   const [abstract, setAbstract] = useState("");
   const [text, setText] = useState("");
+  const [image, setImage] = useState();
 
-  const handleClick = () => {
-    console.log({ tags }, { title }, { abstract }, { text });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const uuid = uuidv4();
 
+    try {
+      await addNewArticle(uuid, tags, title, abstract, text);
+      await uploadImage(uuid, image);
+    } catch (e) {
+      console.log(e.message);
+    }
+
+    //ref(imageDb, "images/");
     setTagInput("");
     setTitle("");
     setAbstract("");
@@ -20,7 +32,7 @@ const NewArticle = ({ setSubmitted }) => {
     setSubmitted(true);
   };
   return (
-    <div className="space-y-2">
+    <form action="submit" className="space-y-2" onSubmit={handleSubmit}>
       <div className="flex gap-2 items-center">
         <label className="text-xl" htmlFor="title">
           Title
@@ -32,6 +44,14 @@ const NewArticle = ({ setSubmitted }) => {
           placeholder="Enter a descriptive Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="space-x-2">
+        <label htmlFor="image">Add an image</label>
+        <input
+          onChange={(e) => setImage(e.target.files[0])}
+          type="file"
+          id="image"
         />
       </div>
 
@@ -73,12 +93,12 @@ const NewArticle = ({ setSubmitted }) => {
       />
       <RenderTags tags={tags} setTags={setTags} />
       <button
-        onClick={handleClick}
+        type="submit"
         className="bg-emerald-900 rounded-xl p-2 w-full text-white font-semibold mt-24"
       >
         Post
       </button>
-    </div>
+    </form>
   );
 };
 

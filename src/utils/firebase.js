@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import { getStorage, uploadBytes, ref } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQoVxpkaNDZq1x1xH4dpRucNzjfC6j_uM",
@@ -32,5 +33,22 @@ export const getFirestoreData = async (uid) => {
   }
   return docSnap.data();
 };
+
+//adds new article data to firebase
+export const addNewArticle = async (uuid, tags, title, abstract, text) => {
+  await setDoc(doc(db, "articles", uuid), {
+    tags: tags,
+    title: title,
+    abstract: abstract,
+    text: text,
+  });
+};
+
+export const uploadImage = async (uuid, image) => {
+  const imgRef = ref(imageDb, `images/${uuid}`);
+  uploadBytes(imgRef, image);
+};
+
+export const imageDb = getStorage(app);
 
 export default app;
