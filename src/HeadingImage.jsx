@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { UserAuth } from "./context/AuthContext";
+import { getFirestoreData } from "./utils/firebase";
 
 const HeadingImage = () => {
   const { user } = UserAuth();
+
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user) {
+        try {
+          const data = await getFirestoreData(user.uid);
+          setName(data.name);
+        } catch (e) {
+          console.log(e.message);
+        }
+      }
+    };
+    fetchData();
+  }, [user]);
+
   return (
     <>
       <div className="relative w-full h-[400px]">
@@ -11,9 +29,10 @@ const HeadingImage = () => {
           alt="code on a screen"
           className="w-full h-full object-cover"
         />
+
         {user && (
-          <p className="absolute top-1/2 text-3xl text-white left-1/3">
-            welcome {user.email}
+          <p className="absolute w-full top-0 h-full flex items-center justify-center text-6xl text-white ">
+            Welcome, {name}!
           </p>
         )}
         <div className="absolute bottom-0 right-0 bg-gray-500 px-2">

@@ -13,6 +13,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await signIn(loginInfo.email, loginInfo.password);
+
       navigate("/");
     } catch (e) {
       console.log("error");

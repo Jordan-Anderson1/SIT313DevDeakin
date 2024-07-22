@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext.jsx";
+import { createDocForNewUser } from "../utils/firebase";
 
 const Register = () => {
   const { createUser } = UserAuth();
@@ -14,27 +15,30 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  //handle updating form feilds
   const handleChange = (e) => {
     const { id, value } = e.target;
     setContact({ ...contact, [id]: value });
   };
 
+  //submit form logic. Create a firebase user. Creates a document for user in firestore.
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await createUser(contact.email, contact.password);
-      navigate("/");
-    } catch (e) {
-      console.log(e.message);
-    }
-    setContact({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
 
-    console.log("Submitted form");
+    if (
+      contact.password === contact.confirmPassword &&
+      contact.password !== ""
+    ) {
+      try {
+        const { user } = await createUser(contact.email, contact.password);
+        await createDocForNewUser(contact.name, contact.email, user.uid);
+        navigate("/");
+      } catch (e) {
+        alert(e.message);
+      }
+    } else {
+      alert("Passwords must match and be at least 6 characters.");
+    }
   };
   return (
     <div className="min-h-screen min-w-screen bg-emerald-900 flex justify-center items-center">

@@ -17,6 +17,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const logout = () => {
+    setUser({});
     return signOut(auth);
   };
 
@@ -26,7 +27,6 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
 
