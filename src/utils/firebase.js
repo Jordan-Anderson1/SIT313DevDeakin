@@ -1,6 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 import { getStorage, uploadBytes, ref } from "firebase/storage";
 
 const firebaseConfig = {
@@ -34,6 +43,18 @@ export const getFirestoreData = async (uid) => {
   return docSnap.data();
 };
 
+//get all articles from firebase
+export const getArticleData = async () => {
+  let articles = [];
+  await getDocs(collection(db, "articles")).then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      articles.push({ ...doc.data(), id: doc.id });
+    });
+  });
+
+  return articles;
+};
+
 //adds new article data to firebase
 export const addNewArticle = async (uuid, tags, title, abstract, text) => {
   await setDoc(doc(db, "articles", uuid), {
@@ -44,6 +65,7 @@ export const addNewArticle = async (uuid, tags, title, abstract, text) => {
   });
 };
 
+//upload image to database with uuid corresponding to article uuid
 export const uploadImage = async (uuid, image) => {
   const imgRef = ref(imageDb, `images/${uuid}`);
   uploadBytes(imgRef, image);

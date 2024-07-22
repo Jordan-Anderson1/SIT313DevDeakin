@@ -6,6 +6,7 @@ import Register from "./routes/Register";
 import Header from "./Header";
 import ProtectedRoute from "./ProtectedRoute";
 import { AuthContextProvider } from "./context/AuthContext";
+import AllArticles from "./routes/AllArticles";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/all-articles" element={<AllArticles />} />
         </Routes>
       </AuthContextProvider>
     </>
