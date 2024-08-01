@@ -16,20 +16,30 @@ const NewArticle = ({ setSubmitted }) => {
     e.preventDefault();
     const uuid = uuidv4();
 
-    try {
-      await addNewArticle(uuid, tags, title, abstract, text);
-      await uploadImage(uuid, image);
-    } catch (e) {
-      console.log(e.message);
+    if (
+      tags.length > 0 &&
+      title !== "" &&
+      abstract !== "" &&
+      text !== "" &&
+      image
+    ) {
+      try {
+        await addNewArticle(uuid, tags, title, abstract, text);
+        await uploadImage(uuid, image);
+        setTagInput("");
+        setTitle("");
+        setAbstract("");
+        setText("");
+        setTags([]);
+        setSubmitted(true);
+      } catch (e) {
+        console.log(e.message);
+      }
+    } else {
+      alert("Please complete all feilds");
     }
 
     //ref(imageDb, "images/");
-    setTagInput("");
-    setTitle("");
-    setAbstract("");
-    setText("");
-    setTags([]);
-    setSubmitted(true);
   };
   return (
     <form action="submit" className="space-y-2" onSubmit={handleSubmit}>

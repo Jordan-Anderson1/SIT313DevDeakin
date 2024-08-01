@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { getArticleData } from "../utils/firebase";
-import Article from "../Article";
+import { getArticleData, getArticleImage } from "../utils/firebase";
+import ArticlePreview from "../ArticlePreview";
+import { useNavigate } from "react-router-dom";
 
 const AllArticles = () => {
-  const [articles, setArticles] = useState([{}]);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         const data = await getArticleData();
         setArticles(data);
-        console.log(data);
       } catch (e) {
         console.log(e.message);
       }
@@ -18,13 +18,28 @@ const AllArticles = () => {
     fetchArticles();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
-    <div>
-      {articles.map((article, index) => (
-        <Article />
-      ))}
-      ;
-    </div>
+    <>
+      <h1 className="text-5xl text-center my-6 font-semibold">
+        All DEV@Deakin Articles
+      </h1>
+      <div className="grid grid-cols-4 gap-4 p-4">
+        {articles.map((article, index) => (
+          <ArticlePreview
+            onClick={() => navigate(`/article/${article.id}`)}
+            key={index}
+            title={article.title}
+            abstract={article.abstract || ""}
+            rating={article.rating}
+            author={article.author || "unknown author"}
+            imageSource={article.imageSource}
+            tags={article.tags}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

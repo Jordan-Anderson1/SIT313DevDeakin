@@ -10,7 +10,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { getStorage, uploadBytes, ref } from "firebase/storage";
+import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQoVxpkaNDZq1x1xH4dpRucNzjfC6j_uM",
@@ -45,14 +45,26 @@ export const getFirestoreData = async (uid) => {
 
 //get all articles from firebase
 export const getArticleData = async () => {
-  let articles = [];
-  await getDocs(collection(db, "articles")).then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      articles.push({ ...doc.data(), id: doc.id });
-    });
-  });
+  try {
+    const articlesSnapshot = await getDocs(collection(db, "articles"));
+    const articles = await Promise.all(
+      articlesSnapshot.docs.map(async (doc) => {
+        const imageUrl = await getArticleImage(doc.id);
+        return { ...doc.data(), id: doc.id, imageSource: imageUrl };
+      })
+    );
+    return articles;
+  } catch (error) {
+    console.error("Error getting article data:", error);
+    throw new Error("Failed to fetch article data");
+  }
+};
 
-  return articles;
+export const getArticleImage = async (uuid) => {
+  const storage = getStorage();
+  const imageRef = ref(storage, `images/${uuid}`);
+  const url = await getDownloadURL(imageRef);
+  return url;
 };
 
 //adds new article data to firebase

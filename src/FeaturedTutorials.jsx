@@ -1,6 +1,6 @@
 import React from "react";
 import { featuredTutorials } from "./data.js";
-import Article from "./Article.jsx";
+import Tutorial from "./Tutorial.jsx";
 
 const FeaturedTutorials = () => {
   return (
@@ -10,7 +10,7 @@ const FeaturedTutorials = () => {
       </h1>
       <div className="flex justify-between mx-12">
         {featuredTutorials.map((article, index) => (
-          <Article
+          <Tutorial
             key={index}
             title={article.title}
             imageSource={article.image}

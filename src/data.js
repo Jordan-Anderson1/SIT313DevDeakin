@@ -3,7 +3,7 @@ export const featuredArticles = [
     image: "https://picsum.photos/600/300?random=4",
     title:
       "Mastering Modern Web Development: Essential Tools and Techniques for 2024",
-    description:
+    abstract:
       "Dive into the latest advancements in web development. This article explores the essential tools, frameworks, and best practices that every modern developer needs to know to stay ahead in 2024. Learn how to leverage these technologies to create fast, responsive, and user-friendly web applications.",
     rating: 5,
     author: "Emma Thompson",
@@ -12,7 +12,7 @@ export const featuredArticles = [
     image: "https://picsum.photos/600/300?random=5",
     title:
       "Building Scalable Applications: Best Practices for Software Engineers",
-    description:
+    abstract:
       "Discover the strategies and techniques for building applications that can grow with your user base. This article covers key concepts such as microservices architecture, database optimization, and load balancing. Gain insights into designing software that can handle increasing demands and ensure a seamless user experience.v",
     rating: 4,
     author: "Michael Johnson",
@@ -21,7 +21,7 @@ export const featuredArticles = [
     image: "https://picsum.photos/600/300?random=6",
     title:
       "AI and Machine Learning in Software Development: Transforming the Industry",
-    description:
+    abstract:
       "Explore the impact of artificial intelligence and machine learning on software development. This article delves into how AI and ML are revolutionizing coding, testing, and deployment processes. Learn about the tools and algorithms that are shaping the future of software engineering and how you can integrate them into your projects.",
     rating: 2,
     author: "Sarah Lee",

@@ -7,7 +7,9 @@ const Article = ({ imageSource, title, description, rating, author }) => {
       <img className="rounded-lg" src={imageSource} />
       <h1 className="font-bold text-2xl">{title}</h1>
       <p className="text-gray-500 text-lg">
-        {description.substring(0, 100) + "..."}
+        {description.length > 100
+          ? description.substring(0, 100) + "..."
+          : description}
       </p>
       <hr className="mt-auto" />
       <div className="flex justify-between">
