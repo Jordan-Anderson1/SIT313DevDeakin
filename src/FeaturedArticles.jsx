@@ -3,12 +3,14 @@ import ArticlePreview from "./ArticlePreview.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import { getArticleData, getArticleImage } from "./utils/firebase";
 import ClipLoader from "react-spinners/ClipLoader";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 
 //Featured articles displays the three articles with the highest rating
 
 const FeaturedArticles = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [index, setIndex] = useState(0);
 
   const navigate = useNavigate();
 
@@ -59,11 +61,11 @@ const FeaturedArticles = () => {
           <ClipLoader size={150} color="green" />
         </div>
       ) : (
-        <div className="my-8 w-full ">
+        <div className="my-8 w-full flex flex-col justify-center items-center">
           <h1 className="text-center text-5xl my-4 font-bold">
             Featured Articles
           </h1>
-          <div className="md:flex md:justify-between md:mx-12 grid justify-center">
+          {/* <div className="md:flex md:justify-between md:mx-12 grid justify-center">
             {articles.map((article, index) => (
               <ArticlePreview
                 onClick={() => navigate(`/article/${article.id}`)}
@@ -76,6 +78,42 @@ const FeaturedArticles = () => {
                 tags={article.tags}
               />
             ))}
+          </div> */}
+
+          <div className="flex items-center gap-2">
+            <FaArrowLeft
+              size="40"
+              color="gray"
+              onClick={() => {
+                if (index === 0) {
+                  setIndex(articles.length - 1);
+                } else {
+                  setIndex((prev) => prev - 1);
+                }
+              }}
+            />
+            {
+              <ArticlePreview
+                title={articles[index].title}
+                imageSource={articles[index].imageSource}
+                abstract={articles[index].abstract}
+                rating={getArticleRating(articles[index].ratings)}
+                author={articles[index].author}
+                tags={articles[index].tags}
+              />
+            }
+
+            <FaArrowRight
+              size="40"
+              color="gray"
+              onClick={() => {
+                if (index === 2) {
+                  setIndex(0);
+                } else {
+                  setIndex((prev) => prev + 1);
+                }
+              }}
+            />
           </div>
           <div className="flex justify-center">
             <Link
