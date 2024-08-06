@@ -69,7 +69,7 @@ const FeaturedArticles = () => {
           {/* //displays until medium screens as a carousel */}
           <div className="flex items-center gap-2 md:hidden">
             <FaArrowLeft
-              size="40"
+              size="30"
               color="gray"
               onClick={() => {
                 if (index === 0) {
@@ -91,7 +91,7 @@ const FeaturedArticles = () => {
             }
 
             <FaArrowRight
-              size="40"
+              size="30"
               color="gray"
               onClick={() => {
                 if (index === 3) {

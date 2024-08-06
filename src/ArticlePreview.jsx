@@ -13,7 +13,7 @@ const ArticlePreview = ({
   return (
     <div
       onClick={onClick}
-      className="max-w-[450px] flex flex-col gap-4 min-h-[600px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl"
+      className="max-w-[450px] flex flex-col gap-4 min-h-[700px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl"
     >
       <img
         className="rounded-lg w-full self-center  h-[200px] object-cover "
