@@ -9,11 +9,13 @@ import Footer from "../Footer";
 const Home = () => {
   return (
     <>
-      <HeadingImage />
-      <FeaturedArticles />
-      {/* <FeaturedTutorials /> */}
-      <SignUp />
-      <Footer />
+      <div className="w-screen overflow-hidden">
+        <HeadingImage />
+        <FeaturedArticles />
+        <FeaturedTutorials />
+        <SignUp />
+        <Footer />
+      </div>
     </>
   );
 };
