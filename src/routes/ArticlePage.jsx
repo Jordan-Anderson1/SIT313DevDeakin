@@ -8,9 +8,13 @@ const ArticlePage = () => {
 
   useEffect(() => {
     const fetchArticle = async () => {
-      const data = await getArticleData();
-      const foundArticle = data.find((article) => article.id === id);
-      setArticle(foundArticle);
+      try {
+        const data = await getArticleData();
+        const foundArticle = data.find((article) => article.id === id);
+        setArticle(foundArticle);
+      } catch (e) {
+        console.log(e.message);
+      }
     };
 
     fetchArticle();
@@ -24,9 +28,8 @@ const ArticlePage = () => {
       <p>This article was written by {article.author || "John Smith"}</p>
 
       <p className="text-xl leading-6">{article.abstract}</p>
-      {article.tags.map((tag, index) => (
-        <p key={index}>{tag}</p>
-      ))}
+      {article.tags &&
+        article.tags.map((tag, index) => <p key={index}>{tag}</p>)}
     </div>
   );
 };

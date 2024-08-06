@@ -13,6 +13,7 @@ const AllArticles = () => {
         setArticles(data);
       } catch (e) {
         console.log(e.message);
+        setArticles([]);
       }
     };
     fetchArticles();
@@ -32,7 +33,7 @@ const AllArticles = () => {
             key={index}
             title={article.title}
             abstract={article.abstract || ""}
-            rating={article.rating}
+            rating={article.rating || 5}
             author={article.author || "unknown author"}
             imageSource={article.imageSource}
             tags={article.tags}

@@ -68,12 +68,20 @@ export const getArticleImage = async (uuid) => {
 };
 
 //adds new article data to firebase
-export const addNewArticle = async (uuid, tags, title, abstract, text) => {
+export const addNewArticle = async (
+  uuid,
+  tags,
+  title,
+  abstract,
+  text,
+  author
+) => {
   await setDoc(doc(db, "articles", uuid), {
     tags: tags,
     title: title,
     abstract: abstract,
     text: text,
+    author: author,
   });
 };
 

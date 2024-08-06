@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RenderTags from "./RenderTags";
 import EnterTags from "./EnterTags";
-import { addNewArticle, uploadImage } from "./utils/firebase";
+import { addNewArticle, getFirestoreData, uploadImage } from "./utils/firebase";
 import { v4 as uuidv4 } from "uuid";
+import { UserAuth } from "./context/AuthContext";
 
 const NewArticle = ({ setSubmitted }) => {
   const [tags, setTags] = useState([]);
@@ -11,6 +12,21 @@ const NewArticle = ({ setSubmitted }) => {
   const [abstract, setAbstract] = useState("");
   const [text, setText] = useState("");
   const [image, setImage] = useState();
+  const [author, setAuthor] = useState("");
+  const { user } = UserAuth();
+
+  useEffect(() => {
+    const fetchAuthorData = async () => {
+      try {
+        const data = await getFirestoreData(user.uid);
+        const authorName = data.name;
+        setAuthor(authorName);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    fetchAuthorData();
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +40,8 @@ const NewArticle = ({ setSubmitted }) => {
       image
     ) {
       try {
-        await addNewArticle(uuid, tags, title, abstract, text);
+        setAuthor();
+        await addNewArticle(uuid, tags, title, abstract, text, author);
         await uploadImage(uuid, image);
         setTagInput("");
         setTitle("");
@@ -38,8 +55,6 @@ const NewArticle = ({ setSubmitted }) => {
     } else {
       alert("Please complete all feilds");
     }
-
-    //ref(imageDb, "images/");
   };
   return (
     <form action="submit" className="space-y-2" onSubmit={handleSubmit}>
