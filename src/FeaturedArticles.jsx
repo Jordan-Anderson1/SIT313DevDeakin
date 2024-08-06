@@ -61,7 +61,7 @@ const FeaturedArticles = () => {
           <ClipLoader size={150} color="green" />
         </div>
       ) : (
-        <div className="my-8 w-full flex flex-col justify-center items-center">
+        <div className="my-8 w-full flex flex-col justify-center items-center p-2">
           <h1 className="text-center text-5xl my-4 font-bold">
             Featured Articles
           </h1>
