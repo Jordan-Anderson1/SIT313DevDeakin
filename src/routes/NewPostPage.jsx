@@ -5,7 +5,7 @@ import PostConfirmation from "../PostConfirmation";
 const NewPostPage = () => {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <div className="bg-emerald-900 min-w-screen min-h-screen flex items-center justify-center">
+    <div className="bg-emerald-900 min-w-screen min-h-screen flex items-center justify-center p-4">
       {!submitted && <NewPost setSubmitted={setSubmitted} />}
       {submitted && <PostConfirmation />}
     </div>

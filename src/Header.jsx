@@ -72,6 +72,7 @@ const header = () => {
           } translate-x-0 duration-500`}
         >
           <Link
+            onClick={() => setMenuOpen(false)}
             to="/post"
             className="text-4xl font-semibold  flex items-center justify-center "
           >
