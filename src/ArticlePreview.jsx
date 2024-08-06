@@ -21,7 +21,7 @@ const ArticlePreview = ({
       />
       <h1 className="font-bold text-2xl">{title}</h1>
       <p className="text-gray-500 text-lg">
-        {abstract.length > 100 ? abstract.substring(0, 100) + "..." : abstract}
+        {abstract.length > 100 ? abstract.substring(0, 200) + "..." : abstract}
       </p>
       <hr className="mt-auto" />
       <div className="flex justify-between">
