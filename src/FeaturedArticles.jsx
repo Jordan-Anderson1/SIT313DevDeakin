@@ -3,6 +3,8 @@ import { featuredArticles } from "./data.js";
 import ArticlePreview from "./ArticlePreview.jsx";
 import { useNavigate, Link } from "react-router-dom";
 
+//Featured artticles displays the three articles with the highest rating
+
 const FeaturedArticles = () => {
   const navigate = useNavigate();
   return (

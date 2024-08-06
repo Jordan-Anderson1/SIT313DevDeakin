@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getArticleData } from "../utils/firebase";
+import RateArticle from "../RateArticle";
 
 const ArticlePage = () => {
   const { id } = useParams();
@@ -30,6 +31,8 @@ const ArticlePage = () => {
       <p className="text-xl leading-6">{article.abstract}</p>
       {article.tags &&
         article.tags.map((tag, index) => <p key={index}>{tag}</p>)}
+
+      <RateArticle id={id} />
     </div>
   );
 };

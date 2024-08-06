@@ -6,6 +6,14 @@ import { useNavigate } from "react-router-dom";
 const AllArticles = () => {
   const [articles, setArticles] = useState([]);
 
+  const getArticleRating = (ratings) => {
+    const total = ratings.reduce((acc, current) => {
+      return acc + current;
+    }, 0);
+
+    return total / ratings.length;
+  };
+
   useEffect(() => {
     const fetchArticles = async () => {
       try {
@@ -16,6 +24,7 @@ const AllArticles = () => {
         setArticles([]);
       }
     };
+
     fetchArticles();
   }, []);
 
@@ -26,14 +35,14 @@ const AllArticles = () => {
       <h1 className="text-5xl text-center my-6 font-semibold">
         All DEV@Deakin Articles
       </h1>
-      <div className="grid grid-cols-4 gap-4 p-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
         {articles.map((article, index) => (
           <ArticlePreview
             onClick={() => navigate(`/article/${article.id}`)}
             key={index}
             title={article.title}
             abstract={article.abstract || ""}
-            rating={article.rating || 5}
+            rating={getArticleRating(article.ratings)}
             author={article.author || "unknown author"}
             imageSource={article.imageSource}
             tags={article.tags}

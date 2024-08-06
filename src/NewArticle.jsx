@@ -15,6 +15,7 @@ const NewArticle = ({ setSubmitted }) => {
   const [author, setAuthor] = useState("");
   const { user } = UserAuth();
 
+  //gets author name from Firebase
   useEffect(() => {
     const fetchAuthorData = async () => {
       try {

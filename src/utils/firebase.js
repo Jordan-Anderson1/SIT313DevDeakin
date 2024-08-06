@@ -9,6 +9,7 @@ import {
   query,
   where,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
@@ -82,6 +83,7 @@ export const addNewArticle = async (
     abstract: abstract,
     text: text,
     author: author,
+    ratins: [],
   });
 };
 
@@ -89,6 +91,21 @@ export const addNewArticle = async (
 export const uploadImage = async (uuid, image) => {
   const imgRef = ref(imageDb, `images/${uuid}`);
   uploadBytes(imgRef, image);
+};
+
+export const updateArticleRating = async (id, rating) => {
+  const articleRef = doc(db, "articles", id);
+
+  try {
+    const articleSnap = await getDoc(articleRef);
+    const data = articleSnap.data();
+    const ratings = data.ratings;
+    ratings.push(rating);
+
+    await updateDoc(articleRef, { ratings: ratings });
+  } catch (e) {
+    console.log(e.message);
+  }
 };
 
 export const imageDb = getStorage(app);

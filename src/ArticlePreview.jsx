@@ -26,11 +26,11 @@ const ArticlePreview = ({
       <hr className="mt-auto" />
       <div className="flex justify-between">
         <p className="flex items-center">
-          {rating} <IoStar size={20} color="gold" />
+          {rating > 0 && rating} <IoStar size={20} color="gold" />
         </p>
         <p className="font-bold">{author}</p>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 min-h-[100px]">
         {tags &&
           tags.map((tag, index) => {
             return <p key={index}>#{tag}</p>;
