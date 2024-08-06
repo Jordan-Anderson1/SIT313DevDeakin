@@ -13,10 +13,10 @@ const ArticlePreview = ({
   return (
     <div
       onClick={onClick}
-      className="max-w-[450px] flex flex-col gap-4 min-h-[500px] hover:cursor-pointer"
+      className="max-w-[450px] flex flex-col gap-4 min-h-[500px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl"
     >
       <img
-        className="rounded-lg w-full h-[200px] object-cover "
+        className="rounded-lg w-full self-center  h-[200px] object-cover "
         src={imageSource}
       />
       <h1 className="font-bold text-2xl">{title}</h1>
@@ -30,10 +30,17 @@ const ArticlePreview = ({
         </p>
         <p className="font-bold">{author}</p>
       </div>
-      <div className="flex gap-2 min-h-[100px]">
+      <div className="min-h-[100px]">
         {tags &&
           tags.map((tag, index) => {
-            return <p key={index}>#{tag}</p>;
+            return (
+              <p
+                className="bg-emerald-900 h-fit text-white p-2 inline-block m-[4px] rounded-md"
+                key={index}
+              >
+                #{tag}
+              </p>
+            );
           })}
       </div>
     </div>

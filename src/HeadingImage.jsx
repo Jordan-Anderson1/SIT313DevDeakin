@@ -31,7 +31,7 @@ const HeadingImage = () => {
         />
 
         {user && (
-          <p className="absolute w-full top-0 h-full flex items-center justify-center text-6xl text-white ">
+          <p className="absolute w-full top-0 h-full flex items-center justify-center text-6xl text-white text-center">
             Welcome, {name}!
           </p>
         )}

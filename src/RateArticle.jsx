@@ -13,6 +13,7 @@ const RateArticle = ({ id }) => {
   const [hasRated, setHasRated] = useState(false);
   const { user } = UserAuth();
 
+  //checks if a user has already rated the article and doesn't allow them to rate it more than once.
   useEffect(() => {
     const checkUserRating = async () => {
       try {
