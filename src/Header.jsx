@@ -67,8 +67,8 @@ const header = () => {
         )}
 
         <div
-          className={`absolute transition-all text-emerald-900 top-18 py-8 ${
-            menuOpen ? "left-0 w-screen h-screen bg-white" : "-left-[200%]"
+          className={`absolute transition-all w-screen h-screen text-emerald-900 top-[78px] py-8 ${
+            menuOpen ? "left-0  bg-white" : "-left-[200%]"
           } translate-x-0 duration-500`}
         >
           <Link
