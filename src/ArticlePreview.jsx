@@ -16,7 +16,7 @@ const ArticlePreview = ({
       className="max-w-[450px] flex flex-col gap-4 min-h-[500px] hover:cursor-pointer"
     >
       <img
-        className="rounded-lg w-[400px] h-[200px] object-cover "
+        className="rounded-lg w-full h-[200px] object-cover "
         src={imageSource}
       />
       <h1 className="font-bold text-2xl">{title}</h1>
