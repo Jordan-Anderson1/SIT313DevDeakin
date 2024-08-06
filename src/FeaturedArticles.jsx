@@ -42,7 +42,7 @@ const FeaturedArticles = () => {
           (a, b) => averageRating(b.ratings) - averageRating(a.ratings)
         );
 
-        setArticles(sortedArticles.slice(0, 3));
+        setArticles(sortedArticles.slice(0, 4));
         console.log(articles);
       } catch (e) {
         console.log(e.message);
@@ -65,22 +65,9 @@ const FeaturedArticles = () => {
           <h1 className="text-center text-5xl my-4 font-bold">
             Featured Articles
           </h1>
-          {/* <div className="md:flex md:justify-between md:mx-12 grid justify-center">
-            {articles.map((article, index) => (
-              <ArticlePreview
-                onClick={() => navigate(`/article/${article.id}`)}
-                key={index}
-                title={article.title}
-                imageSource={article.imageSource}
-                abstract={article.abstract}
-                rating={getArticleRating(article.ratings)}
-                author={article.author}
-                tags={article.tags}
-              />
-            ))}
-          </div> */}
 
-          <div className="flex items-center gap-2">
+          {/* //displays until medium screens as a carousel */}
+          <div className="flex items-center gap-2 md:hidden">
             <FaArrowLeft
               size="40"
               color="gray"
@@ -107,13 +94,29 @@ const FeaturedArticles = () => {
               size="40"
               color="gray"
               onClick={() => {
-                if (index === 2) {
+                if (index === 3) {
                   setIndex(0);
                 } else {
                   setIndex((prev) => prev + 1);
                 }
               }}
             />
+          </div>
+
+          {/* displays as a grid on medium and above screens */}
+          <div className=" md:justify-between md:mx-12 hidden md:grid md:grid-cols-2  xl:grid-cols-4 gap-8 p-4  justify-center">
+            {articles.map((article, index) => (
+              <ArticlePreview
+                onClick={() => navigate(`/article/${article.id}`)}
+                key={index}
+                title={article.title}
+                imageSource={article.imageSource}
+                abstract={article.abstract}
+                rating={getArticleRating(article.ratings)}
+                author={article.author}
+                tags={article.tags}
+              />
+            ))}
           </div>
           <div className="flex justify-center">
             <Link
