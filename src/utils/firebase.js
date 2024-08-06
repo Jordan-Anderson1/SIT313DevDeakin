@@ -10,6 +10,7 @@ import {
   where,
   getDocs,
   updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
@@ -83,7 +84,8 @@ export const addNewArticle = async (
     abstract: abstract,
     text: text,
     author: author,
-    ratins: [],
+    ratings: [],
+    usersWhoRatedArticle: [],
   });
 };
 
@@ -103,6 +105,29 @@ export const updateArticleRating = async (id, rating) => {
     ratings.push(rating);
 
     await updateDoc(articleRef, { ratings: ratings });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const getUsersWhoRatedArticle = async (articleId) => {
+  const articleRef = doc(db, "articles", articleId);
+
+  try {
+    const articleSnap = await getDoc(articleRef);
+    const data = articleSnap.data();
+    const users = data.usersWhoRatedArticle || [];
+    return users;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const addUserToRatingList = async (articleId, userId) => {
+  const articleRef = doc(db, "articles", articleId);
+
+  try {
+    await updateDoc(articleRef, { usersWhoRatedArticle: arrayUnion(userId) });
   } catch (e) {
     console.log(e.message);
   }

@@ -11,7 +11,7 @@ const AllArticles = () => {
       return acc + current;
     }, 0);
 
-    return total / ratings.length;
+    return Math.ceil(total / ratings.length);
   };
 
   useEffect(() => {

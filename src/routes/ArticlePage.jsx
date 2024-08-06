@@ -21,16 +21,36 @@ const ArticlePage = () => {
     fetchArticle();
   }, [id]);
   return (
-    <div className="min-w-screen min-h-screen p-6">
+    <div className="min-w-screen bg-gray-50">
       <div className="flex items-center justify-center">
-        <img src={article.imageSource} />
+        <img
+          src={article.imageSource}
+          className="w-full h-[500px]  object-contain"
+        />
       </div>
-      <h1 className="text-5xl my-4 text-center">{article.title}</h1>
-      <p>This article was written by {article.author || "John Smith"}</p>
+      <h1 className="text-5xl mt-4 font-semibold text-center">
+        {article.title}
+      </h1>
+      <p className="text-center">
+        This article was written by
+        <span className="underline ml-1">
+          {article.author || "Unknown author"}
+        </span>
+      </p>
 
-      <p className="text-xl leading-6">{article.abstract}</p>
-      {article.tags &&
-        article.tags.map((tag, index) => <p key={index}>{tag}</p>)}
+      <div className="p-6 space-y-4 text-2xl">
+        <p>
+          <span className="font-semibold">Abstract: </span>
+          {article.abstract}
+        </p>
+
+        <div className="flex gap-4">
+          {article.tags &&
+            article.tags.map((tag, index) => <p key={index}>#{tag}</p>)}
+        </div>
+
+        <p className="text-2xl text-gray-900 leading-8">{article.text}</p>
+      </div>
 
       <RateArticle id={id} />
     </div>
