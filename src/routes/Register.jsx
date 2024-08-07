@@ -51,50 +51,53 @@ const Register = () => {
       {loading ? (
         <ClipLoader size={150} color="white" />
       ) : (
-        <div className="min-w-[800px] flex flex-col gap-4 bg-white rounded-xl p-8">
-          <h1 className="text-center text-4xl text-emerald-900 font-bold mb-4">
+        <div className="min-w-[300px] max-w-[600px] flex-grow flex flex-col gap-4 bg-white rounded-xl p-8 m-4 ">
+          <h1 className="text-center text-lg md:text-4xl text-emerald-900 font-bold mb-4">
             Create a DEV@Deakin Account
           </h1>
           <form
             onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-6 text-2xl"
+            className="w-full flex flex-col gap-6 text-lg md:text-2xl"
           >
-            <div className="flex">
+            <div className="flex items-center">
               <label htmlFor="name">Name</label>
               <input
                 value={contact.name}
                 onChange={handleChange}
-                className="w-[450px] ml-auto border-2 p-2 rounded-lg"
+                className=" border-2 p-2 rounded-lg flex-1 ml-4  "
                 type="text"
                 id="name"
               />
             </div>
-            <div className="flex">
+            <div className="flex items-center">
               <label htmlFor="email">Email</label>
               <input
                 value={contact.email}
                 onChange={handleChange}
-                className="w-[450px] ml-auto border-2 p-2 rounded-lg"
+                className="  border-2 p-2 rounded-lg flex-1 ml-4"
                 type="email"
                 id="email"
               />
             </div>
-            <div className="flex">
+            <div className="flex items-center">
               <label htmlFor="password">Password</label>
               <input
                 value={contact.password}
                 onChange={handleChange}
-                className="w-[450px] ml-auto border-2 p-2 rounded-lg"
+                className="  border-2 p-2 rounded-lg flex-1 ml-4"
                 type="password"
                 id="password"
               />
             </div>
-            <div className="flex">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+            <div className="flex items-center">
+              <label htmlFor="confirmPassword">
+                Confirm <br />
+                Password
+              </label>
               <input
                 value={contact.confirmPassword}
                 onChange={handleChange}
-                className="w-[450px] ml-auto border-2 p-2 rounded-lg"
+                className="  border-2 p-2 rounded-lg flex-1 ml-4"
                 type="password"
                 id="confirmPassword"
               />

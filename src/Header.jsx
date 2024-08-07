@@ -11,6 +11,7 @@ const header = () => {
 
   const handleLogout = async () => {
     try {
+      setMenuOpen(!menuOpen);
       await logout();
       navigate("/login");
       console.log("You have logged out");
@@ -28,6 +29,13 @@ const header = () => {
         placeholder="Search"
         className="w-full px-2 rounded-lg hidden md:inline"
       />
+
+      <Link
+        className="text-2xl font-semibold text-white md:flex items-center justify-center hidden "
+        to="questions"
+      >
+        Questions
+      </Link>
       <Link
         to="/post"
         className="text-2xl font-semibold text-white md:flex items-center justify-center hidden "
@@ -44,7 +52,7 @@ const header = () => {
       ) : (
         <Link
           to="/login"
-          className="text-2xl font-semibold text-white flex items-center justify-center"
+          className="text-2xl font-semibold text-white md:flex items-center justify-center hidden"
         >
           Login
         </Link>
@@ -73,6 +81,13 @@ const header = () => {
         >
           <Link
             onClick={() => setMenuOpen(false)}
+            to="/questions"
+            className="text-4xl font-semibold  flex items-center justify-center "
+          >
+            Questions
+          </Link>
+          <Link
+            onClick={() => setMenuOpen(false)}
             to="/post"
             className="text-4xl font-semibold  flex items-center justify-center "
           >
@@ -87,6 +102,9 @@ const header = () => {
             </Link>
           ) : (
             <Link
+              onClick={() => {
+                setMenuOpen(!menuOpen);
+              }}
               to="/login"
               className="text-4xl font-semibold  flex items-center justify-center"
             >

@@ -13,15 +13,15 @@ const ArticlePreview = ({
   return (
     <div
       onClick={onClick}
-      className="max-w-[450px] flex flex-col gap-4 min-h-[700px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl"
+      className="max-w-[450px] flex flex-col gap-4 h-[600px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl shadow-lg"
     >
       <img
         className="rounded-lg w-full self-center  h-[200px] object-cover "
         src={imageSource}
       />
       <h1 className="font-bold text-2xl">{title}</h1>
-      <p className="text-gray-500 text-lg">
-        {abstract.length > 100 ? abstract.substring(0, 200) + "..." : abstract}
+      <p className="text-gray-500 text-lg ">
+        {abstract.length > 100 ? abstract.substring(0, 100) + "..." : abstract}
       </p>
       <hr className="mt-auto" />
       <div className="flex justify-between">

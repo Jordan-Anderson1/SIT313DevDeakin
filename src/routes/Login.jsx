@@ -38,7 +38,7 @@ const Login = () => {
       {loading ? (
         <ClipLoader size={150} color="white" />
       ) : (
-        <div className="min-w-[500px] flex flex-col items-center justify-center gap-4 bg-white rounded-xl p-8">
+        <div className="min-w-[300px] max-w-[600px] flex-grow flex flex-col items-center justify-center gap-4 bg-white rounded-xl p-8 m-4">
           <form
             className="flex flex-col justify-center w-full gap-4 text-2xl"
             onSubmit={handleSubmit}

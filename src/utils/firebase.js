@@ -62,6 +62,21 @@ export const getArticleData = async () => {
   }
 };
 
+//get all questions from firebase
+export const getQuestionData = async () => {
+  try {
+    const questionSnapshot = await getDocs(collection(db, "questions"));
+    const questionsList = questionSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return questionsList;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 export const getArticleImage = async (uuid) => {
   const storage = getStorage();
   const imageRef = ref(storage, `images/${uuid}`);
@@ -89,6 +104,23 @@ export const addNewArticle = async (
   });
 };
 
+//add new question to database
+export const addNewQuestion = async (
+  uuid,
+  title,
+  description,
+  tags,
+  author
+) => {
+  await setDoc(doc(db, "questions", uuid), {
+    title: title,
+    description: description,
+    tags: tags,
+    author: author,
+    comments: [],
+  });
+};
+
 //upload image to database with uuid corresponding to article uuid
 export const uploadImage = async (uuid, image) => {
   const imgRef = ref(imageDb, `images/${uuid}`);
@@ -105,6 +137,22 @@ export const updateArticleRating = async (id, rating) => {
     ratings.push(rating);
 
     await updateDoc(articleRef, { ratings: ratings });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+//add comment to question
+export const addCommentToQuestion = async (questionId, newComment) => {
+  const questionRef = doc(db, "questions", questionId);
+
+  try {
+    const questionSnap = await getDoc(questionRef);
+
+    const data = questionSnap.data();
+    const comments = data.comments;
+    comments.push(newComment);
+    await updateDoc(questionRef, { comments: comments });
   } catch (e) {
     console.log(e.message);
   }

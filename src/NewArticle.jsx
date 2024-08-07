@@ -41,7 +41,6 @@ const NewArticle = ({ setSubmitted }) => {
       image
     ) {
       try {
-        setAuthor();
         await addNewArticle(uuid, tags, title, abstract, text, author);
         await uploadImage(uuid, image);
         setTagInput("");

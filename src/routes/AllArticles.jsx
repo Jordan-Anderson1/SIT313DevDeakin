@@ -35,7 +35,7 @@ const AllArticles = () => {
       <h1 className="text-5xl text-center my-6 font-semibold">
         All DEV@Deakin Articles
       </h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4  justify-center">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4 justify-center">
         {articles.map((article, index) => (
           <ArticlePreview
             onClick={() => navigate(`/article/${article.id}`)}

@@ -1,16 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Tag from "./Tag";
 import RenderTags from "./RenderTags";
 import EnterTags from "./EnterTags";
+import { v4 as uuidv4 } from "uuid";
+import { UserAuth } from "./context/AuthContext";
+import { addNewQuestion, getFirestoreData } from "./utils/firebase";
 
 const Question = ({ setSubmitted }) => {
   const [tags, setTags] = useState([]);
   const [tagInput, setTagInput] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
+  const { user } = UserAuth();
 
-  const handleClick = () => {
-    console.log({ tags }, { title }, { description });
+  //gets author name from Firebase
+  useEffect(() => {
+    const fetchAuthorData = async () => {
+      try {
+        const data = await getFirestoreData(user.uid);
+        const authorName = data.name;
+        setAuthor(authorName);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+    fetchAuthorData();
+  }, [user]);
+  const handleClick = async () => {
+    const uuid = uuidv4();
+
+    if (title !== "" && (description !== "") & (tags.length > 0)) {
+      try {
+        await addNewQuestion(uuid, title, description, tags, author);
+        setTagInput("");
+        setTitle("");
+        setDescription("");
+        setTags([]);
+        setSubmitted(true);
+      } catch (e) {
+        alert("Please complete all feilds ");
+      }
+    }
 
     setTagInput("");
     setTitle("");
