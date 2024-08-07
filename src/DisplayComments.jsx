@@ -1,6 +1,11 @@
+import { Timestamp } from "firebase/firestore";
 import React, { useEffect } from "react";
 
 const DisplayComments = ({ comments, commented, id }) => {
+  const formatDate = (timestamp) => {
+    if (timestamp instanceof Timestamp)
+      return timestamp.toDate().toLocaleString();
+  };
   useEffect(() => {}, [commented]);
   return (
     <div className="bg-gray-50 p-6 space-y-4 overflow-wrap">
@@ -10,9 +15,12 @@ const DisplayComments = ({ comments, commented, id }) => {
         comments.map((comment, index) => (
           <div key={index} className="flex gap-4 animate-fadeIn">
             <p className="whitespace-nowrap mr-4 md:mr-8">{comment.username}</p>
-            <p className="border-l-2 border-gray-300 pl-2 break-words break-all whitespace-normal">
-              {comment.comment}
-            </p>
+            <div className="border-l-2 border-gray-300 pl-2">
+              <p>{formatDate(comment.date)}</p>
+              <p className=" break-words break-all whitespace-normal">
+                {comment.comment}
+              </p>
+            </div>
           </div>
         ))
       ) : (

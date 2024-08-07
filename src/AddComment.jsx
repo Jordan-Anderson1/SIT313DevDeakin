@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addCommentToQuestion } from "./utils/firebase";
+import { Timestamp } from "firebase/firestore";
 
 const AddComment = ({ id, username, setCommented, commented }) => {
   const [comment, setComment] = useState("");
@@ -7,7 +8,12 @@ const AddComment = ({ id, username, setCommented, commented }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addCommentToQuestion(id, { comment: comment, username: username });
+      const date = Timestamp.fromDate(new Date());
+      await addCommentToQuestion(id, {
+        comment: comment,
+        username: username,
+        date: date,
+      });
       setComment("");
       setCommented(!commented);
     } catch (e) {
