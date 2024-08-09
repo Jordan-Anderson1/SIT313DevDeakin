@@ -95,7 +95,7 @@ const FeaturedTutorials = () => {
               size="30"
               color="gray"
               onClick={() => {
-                if (index === 3) {
+                if (index === 2) {
                   setIndex(0);
                 } else {
                   setIndex((prev) => prev + 1);
