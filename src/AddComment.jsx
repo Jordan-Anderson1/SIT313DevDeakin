@@ -8,7 +8,7 @@ const AddComment = ({ id, username, setCommented, commented }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const date = Timestamp.fromDate(new Date());
+      const date = Timestamp.now;
       await addCommentToQuestion(id, {
         comment: comment,
         username: username,

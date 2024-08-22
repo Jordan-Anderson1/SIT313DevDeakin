@@ -45,6 +45,17 @@ export const getFirestoreData = async (uid) => {
   return docSnap.data();
 };
 
+export const getHiddenQuestions = async (uid) => {
+  try {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+
+    return docSnap.data().hiddenQuestions || [];
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 //get all articles from firebase
 export const getArticleData = async () => {
   try {
@@ -110,7 +121,8 @@ export const addNewQuestion = async (
   title,
   description,
   tags,
-  author
+  author,
+  date
 ) => {
   await setDoc(doc(db, "questions", uuid), {
     title: title,
@@ -118,6 +130,7 @@ export const addNewQuestion = async (
     tags: tags,
     author: author,
     comments: [],
+    uploadDate: date,
   });
 };
 
@@ -176,6 +189,16 @@ export const addUserToRatingList = async (articleId, userId) => {
 
   try {
     await updateDoc(articleRef, { usersWhoRatedArticle: arrayUnion(userId) });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const hideQuestion = async (questionId, userId) => {
+  const userRef = doc(db, "users", userId);
+
+  try {
+    await updateDoc(userRef, { hiddenQuestions: arrayUnion(questionId) });
   } catch (e) {
     console.log(e.message);
   }

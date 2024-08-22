@@ -87,6 +87,7 @@ const FeaturedArticles = () => {
                 rating={getArticleRating(articles[index].ratings)}
                 author={articles[index].author}
                 tags={articles[index].tags}
+                onClick={() => navigate(`/article/${articles[index].id}`)}
               />
             }
 

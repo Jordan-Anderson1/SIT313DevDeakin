@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { UserAuth } from "./context/AuthContext";
 import { addNewQuestion, getFirestoreData } from "./utils/firebase";
 import ClipLoader from "react-spinners/ClipLoader";
+import { Timestamp } from "firebase/firestore";
 
 const Question = ({ setSubmitted }) => {
   const [tags, setTags] = useState([]);
@@ -29,13 +30,15 @@ const Question = ({ setSubmitted }) => {
     };
     fetchAuthorData();
   }, [user]);
+
+  //post question data to firebase
   const handleClick = async () => {
     const uuid = uuidv4();
-
+    const date = Timestamp.now();
     if (title !== "" && (description !== "") & (tags.length > 0)) {
       try {
         setLoading(true);
-        await addNewQuestion(uuid, title, description, tags, author);
+        await addNewQuestion(uuid, title, description, tags, author, date);
         setTagInput("");
         setTitle("");
         setDescription("");
