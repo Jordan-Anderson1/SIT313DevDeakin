@@ -11,6 +11,7 @@ import {
   getDocs,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
 
@@ -199,6 +200,16 @@ export const hideQuestion = async (questionId, userId) => {
 
   try {
     await updateDoc(userRef, { hiddenQuestions: arrayUnion(questionId) });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const unhideQuestion = async (questionId, userId) => {
+  const userRef = doc(db, "users", userId);
+
+  try {
+    await updateDoc(userRef, { hiddenQuestions: arrayRemove(questionId) });
   } catch (e) {
     console.log(e.message);
   }
