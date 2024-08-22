@@ -36,30 +36,35 @@ const HiddenQuestionsPage = () => {
     fetchQuestions();
   }, [hiddenQuestions]);
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4 justify-center w-screen">
-      {hiddenQuestions.length > 0 ? (
-        hiddenQuestions.map((question, index) => (
-          <QuestionPreview
-            onClick={() => navigate(`/question/${question.id}`)}
-            key={index}
-            title={question.title}
-            author={question.author}
-            description={question.description}
-            tags={question.tags}
-            uploadDate={formatDate(question.uploadDate)}
-            id={question.id}
-            hidden={true}
-          />
-        ))
-      ) : (
-        <div className="flex  flex-col align-center w-screen justify-center">
-          <p className="text-4xl text-center font-bold">No hidden questions</p>
-          <Link to="/questions" className="text-center underline mt-4">
-            Click here to see all questions
-          </Link>
-        </div>
-      )}
-    </div>
+    <>
+      <h1 className="text-2xl text-center my-4 font-bold">Hidden Questions</h1>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4 justify-center w-screen">
+        {hiddenQuestions.length > 0 ? (
+          hiddenQuestions.map((question, index) => (
+            <QuestionPreview
+              onClick={() => navigate(`/question/${question.id}`)}
+              key={index}
+              title={question.title}
+              author={question.author}
+              description={question.description}
+              tags={question.tags}
+              uploadDate={formatDate(question.uploadDate)}
+              id={question.id}
+              hidden={true}
+            />
+          ))
+        ) : (
+          <div className="flex  flex-col align-center w-screen justify-center">
+            <p className="text-4xl text-center font-bold">
+              No hidden questions
+            </p>
+            <Link to="/questions" className="text-center underline mt-4">
+              Click here to see all questions
+            </Link>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
