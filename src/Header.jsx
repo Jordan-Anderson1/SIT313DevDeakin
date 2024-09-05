@@ -32,6 +32,13 @@ const header = () => {
 
       <Link
         className="text-2xl font-semibold text-white md:flex items-center justify-center hidden "
+        to="/plans"
+      >
+        Plans
+      </Link>
+
+      <Link
+        className="text-2xl font-semibold text-white md:flex items-center justify-center hidden "
         to="questions"
       >
         Questions
@@ -79,6 +86,13 @@ const header = () => {
             menuOpen ? "left-0  bg-white" : "-left-[200%]"
           } translate-x-0 duration-500`}
         >
+          <Link
+            className="text-4xl font-semibold  flex items-center justify-center "
+            onClick={() => setMenuOpen(false)}
+            to="plans"
+          >
+            Plans
+          </Link>
           <Link
             onClick={() => setMenuOpen(false)}
             to="/questions"

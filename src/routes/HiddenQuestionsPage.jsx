@@ -24,7 +24,7 @@ const HiddenQuestionsPage = () => {
           //filter out hidden questions
           const hiddenQuestions = await getHiddenQuestions(user.uid);
           const visibleQuestions = data.filter((question) =>
-            hiddenQuestions.includes(question.id)
+            hiddenQuestions.includes(question.id),
           );
 
           setHiddenQuestions(visibleQuestions);
@@ -37,8 +37,8 @@ const HiddenQuestionsPage = () => {
   }, [hiddenQuestions]);
   return (
     <>
-      <h1 className="text-2xl text-center my-4 font-bold">Hidden Questions</h1>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4 justify-center w-screen">
+      <h1 className="my-4 text-center text-2xl font-bold">Hidden Questions</h1>
+      <div className="grid w-screen justify-center gap-8 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {hiddenQuestions.length > 0 ? (
           hiddenQuestions.map((question, index) => (
             <QuestionPreview
@@ -54,11 +54,11 @@ const HiddenQuestionsPage = () => {
             />
           ))
         ) : (
-          <div className="flex  flex-col align-center w-screen justify-center">
-            <p className="text-4xl text-center font-bold">
+          <div className="align-center flex w-screen flex-col justify-center">
+            <p className="text-center text-4xl font-bold">
               No hidden questions
             </p>
-            <Link to="/questions" className="text-center underline mt-4">
+            <Link to="/questions" className="mt-4 text-center underline">
               Click here to see all questions
             </Link>
           </div>

@@ -4,20 +4,38 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(`signed up to newsletter with email: ${email}`);
-    setEmail("");
-    setSubscribed(true);
+
+    //post
+    try {
+      const response = await fetch("http://localhost:3000/", {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email }),
+      });
+
+      if (response.ok) {
+        console.log("Subscription successful");
+        setEmail("");
+        setSubscribed(true);
+      } else {
+        const errorText = await response.text();
+        console.error("Subscription failed:", errorText);
+      }
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
-    <div className="p-4 bg-emerald-900">
+    <div className="bg-emerald-900 p-4">
       {/* medium and above screens */}
       <div className="hidden md:inline">
         <form
           onSubmit={handleSubmit}
-          className="flex align-center justify-center"
+          className="align-center flex justify-center"
           action="/"
           method="post"
         >
@@ -25,7 +43,7 @@ const SignUp = () => {
             Sign Up For Our Daily Insider
           </label>
           <input
-            className="flex-1 p-2 mx-6 rounded-lg text-2xl"
+            className="mx-6 flex-1 rounded-lg p-2 text-2xl"
             type="email"
             placeholder={`${
               subscribed ? "Thanks for subscribing!" : "Enter your email"
@@ -35,7 +53,7 @@ const SignUp = () => {
             disabled={subscribed}
           />
           <button
-            className="bg-emerald-600 ml-auto rounded-lg w-[200px] text-white text-3xl"
+            className="ml-auto w-[200px] rounded-lg bg-emerald-600 text-3xl text-white"
             type="submit"
             disabled={subscribed}
           >
@@ -52,11 +70,11 @@ const SignUp = () => {
           action="/"
           method="post"
         >
-          <label className="text-3xl text-center text-white" htmlFor="email">
+          <label className="text-center text-3xl text-white" htmlFor="email">
             Sign Up For Our Daily Insider!
           </label>
           <input
-            className="flex-1 p-2 rounded-lg text-2xl"
+            className="flex-1 rounded-lg p-2 text-2xl"
             type="email"
             placeholder={`${
               subscribed ? "Thanks for subscribing!" : "Enter your email"
@@ -66,7 +84,7 @@ const SignUp = () => {
             disabled={subscribed}
           />
           <button
-            className="bg-emerald-600 p-2 rounded-lg text-white text-2xl"
+            className="rounded-lg bg-emerald-600 p-2 text-2xl text-white"
             type="submit"
             disabled={subscribed}
           >

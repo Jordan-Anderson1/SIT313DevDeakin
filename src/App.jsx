@@ -12,6 +12,8 @@ import AllQuestionsPage from "./routes/AllQuestionsPage";
 import LoginAlert from "./routes/LoginAlert";
 import QuestionPage from "./routes/QuestionPage";
 import HiddenQuestionsPage from "./routes/HiddenQuestionsPage";
+import PlansPage from "./routes/PlansPage";
+import PaymentPage from "./routes/PaymentPage";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
           <Route path="/loginAlert" element={<LoginAlert />} />
           <Route path="/question/:id" element={<QuestionPage />} />
           <Route path="/hidden-questions" element={<HiddenQuestionsPage />} />
+          <Route path="/plans" element={<PlansPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
         </Routes>
       </AuthContextProvider>
     </>

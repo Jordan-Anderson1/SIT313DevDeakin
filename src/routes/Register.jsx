@@ -47,24 +47,24 @@ const Register = () => {
     }
   };
   return (
-    <div className="min-h-screen min-w-screen bg-emerald-900 flex justify-center items-center">
+    <div className="min-w-screen flex min-h-screen items-center justify-center bg-emerald-900">
       {loading ? (
         <ClipLoader size={150} color="white" />
       ) : (
-        <div className="min-w-[300px] max-w-[600px] flex-grow flex flex-col gap-4 bg-white rounded-xl p-8 m-4 ">
-          <h1 className="text-center text-lg md:text-4xl text-emerald-900 font-bold mb-4">
+        <div className="m-4 flex min-w-[300px] max-w-[600px] flex-grow flex-col gap-4 rounded-xl bg-white p-8">
+          <h1 className="mb-4 text-center text-lg font-bold text-emerald-900 md:text-4xl">
             Create a DEV@Deakin Account
           </h1>
           <form
             onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-6 text-lg md:text-2xl"
+            className="flex w-full flex-col gap-6 text-lg md:text-2xl"
           >
             <div className="flex items-center">
               <label htmlFor="name">Name</label>
               <input
                 value={contact.name}
                 onChange={handleChange}
-                className=" border-2 p-2 rounded-lg flex-1 ml-4  "
+                className="ml-4 flex-1 rounded-lg border-2 p-2"
                 type="text"
                 id="name"
               />
@@ -74,7 +74,7 @@ const Register = () => {
               <input
                 value={contact.email}
                 onChange={handleChange}
-                className="  border-2 p-2 rounded-lg flex-1 ml-4"
+                className="ml-4 flex-1 rounded-lg border-2 p-2"
                 type="email"
                 id="email"
               />
@@ -84,7 +84,7 @@ const Register = () => {
               <input
                 value={contact.password}
                 onChange={handleChange}
-                className="  border-2 p-2 rounded-lg flex-1 ml-4"
+                className="ml-4 flex-1 rounded-lg border-2 p-2"
                 type="password"
                 id="password"
               />
@@ -97,13 +97,13 @@ const Register = () => {
               <input
                 value={contact.confirmPassword}
                 onChange={handleChange}
-                className="  border-2 p-2 rounded-lg flex-1 ml-4"
+                className="ml-4 flex-1 rounded-lg border-2 p-2"
                 type="password"
                 id="confirmPassword"
               />
             </div>
             <button
-              className="bg-emerald-900 p-2 mt-2 rounded-xl text-white text-2xl"
+              className="mt-2 rounded-xl bg-emerald-900 p-2 text-2xl text-white"
               type="submit"
             >
               Register
