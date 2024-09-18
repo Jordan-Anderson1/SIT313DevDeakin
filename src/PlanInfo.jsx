@@ -1,7 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const PlanInfo = ({ title, price, features, colour, premium }) => {
+const PlanInfo = ({
+  title,
+  price,
+  features,
+  colour,
+  premium,
+  handleCheckout,
+}) => {
   const navigate = useNavigate();
   return (
     <div className={`rounded-xl border p-4 ${colour}`}>
@@ -14,7 +21,7 @@ const PlanInfo = ({ title, price, features, colour, premium }) => {
       </ul>
       {premium && (
         <button
-          onClick={() => navigate("/payment")}
+          onClick={handleCheckout}
           className="mt-8 w-full rounded-xl border border-white p-4 text-center font-semibold"
         >
           Upgrade to Premium

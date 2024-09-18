@@ -6,6 +6,7 @@ import AddComment from "../AddComment";
 import DisplayComments from "../DisplayComments";
 import { UserAuth } from "../context/AuthContext";
 import { getFirestoreData } from "../utils/firebase";
+import Markdown from "react-markdown";
 
 const QuestionPage = () => {
   const { id } = useParams();
@@ -64,22 +65,22 @@ const QuestionPage = () => {
   return (
     <div>
       {loading ? (
-        <div className="w-screen h-screen flex items-center justify-center">
+        <div className="flex h-screen w-screen items-center justify-center">
           <ClipLoader size={150} color="green" />
         </div>
       ) : (
         <>
           <div className="p-4">
-            <h1 className="text-2xl md:text-4xl font-bold text-center">
+            <h1 className="text-center text-2xl font-bold md:text-4xl">
               {question.title}
             </h1>
             <p className="text-center">
               This question was asked by{" "}
               <span className="underline">{question.author}</span>
             </p>
-            <p className=" text-lg md:text-2xl text-gray-900 leading-6 my-6">
+            <Markdown className="my-6 text-lg leading-6 text-gray-900 md:text-2xl">
               {question.description}
-            </p>
+            </Markdown>
             <div className="flex gap-4">
               {question.tags.map((tag, index) => {
                 return <p key={index}>#{tag}</p>;

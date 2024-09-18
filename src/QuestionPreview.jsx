@@ -1,6 +1,7 @@
 import React from "react";
 import { UserAuth } from "./context/AuthContext";
 import { hideQuestion, unhideQuestion } from "./utils/firebase";
+import Markdown from "react-markdown";
 
 const QuestionPreview = ({
   title,
@@ -27,11 +28,13 @@ const QuestionPreview = ({
   return (
     <div
       onClick={onClick}
-      className="flex flex-col h-[400px] hover:cursor-pointer bg-slate-100 p-4 rounded-xl shadow-lg relative"
+      className="relative flex h-[400px] flex-col rounded-xl bg-slate-100 p-4 shadow-lg hover:cursor-pointer"
     >
-      <p className="text-2xl w-full font-bold">{title}</p>
+      <p className="w-full text-2xl font-bold">{title}</p>
 
-      <p className="text-lg mt-4">{description}</p>
+      <Markdown className="mt-4 text-lg">
+        {description.length > 20 ? description.slice(0, 100) : description}
+      </Markdown>
       <p className="mt-auto text-lg font-semibold">Question by {author}</p>
       <p>{uploadDate}</p>
 
@@ -40,7 +43,7 @@ const QuestionPreview = ({
           tags.map((tag, index) => {
             return (
               <p
-                className="bg-emerald-900 h-fit text-white p-2 inline-block m-[4px] rounded-md"
+                className="m-[4px] inline-block h-fit rounded-md bg-emerald-900 p-2 text-white"
                 key={index}
               >
                 #{tag}
@@ -50,7 +53,7 @@ const QuestionPreview = ({
       </div>
 
       <button
-        className="z-50 m-2 border border-emerald-900 p-2 font-semibold rounded-xl"
+        className="z-50 m-2 rounded-xl border border-emerald-900 p-2 font-semibold"
         onClick={handleHideQuestion}
       >
         {hidden ? "Unhide this question" : "hide this question"}

@@ -13,7 +13,8 @@ import LoginAlert from "./routes/LoginAlert";
 import QuestionPage from "./routes/QuestionPage";
 import HiddenQuestionsPage from "./routes/HiddenQuestionsPage";
 import PlansPage from "./routes/PlansPage";
-import PaymentPage from "./routes/PaymentPage";
+
+import Success from "./routes/Success";
 
 function App() {
   return (
@@ -53,7 +54,8 @@ function App() {
           <Route path="/question/:id" element={<QuestionPage />} />
           <Route path="/hidden-questions" element={<HiddenQuestionsPage />} />
           <Route path="/plans" element={<PlansPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
+
+          <Route path="/success" element={<Success />} />
         </Routes>
       </AuthContextProvider>
     </>
