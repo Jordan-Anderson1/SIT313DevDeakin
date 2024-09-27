@@ -57,7 +57,7 @@ export const getHiddenQuestions = async (uid) => {
   }
 };
 
-//get all articles from firebase
+//get all articles from firebase//
 export const getArticleData = async () => {
   try {
     const articlesSnapshot = await getDocs(collection(db, "articles"));
