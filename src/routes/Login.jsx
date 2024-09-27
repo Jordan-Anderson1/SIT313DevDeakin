@@ -34,13 +34,13 @@ const Login = () => {
     setLoginInfo((prev) => ({ ...prev, [id]: value }));
   };
   return (
-    <div className="min-h-screen min-w-screen bg-emerald-900 flex justify-center items-center">
+    <div className="min-w-screen flex min-h-screen items-center justify-center bg-emerald-900">
       {loading ? (
         <ClipLoader size={150} color="white" />
       ) : (
-        <div className="min-w-[300px] max-w-[600px] flex-grow flex flex-col items-center justify-center gap-4 bg-white rounded-xl p-8 m-4">
+        <div className="m-4 flex min-w-[300px] max-w-[600px] flex-grow flex-col items-center justify-center gap-4 rounded-xl bg-white p-8">
           <form
-            className="flex flex-col justify-center w-full gap-4 text-2xl"
+            className="flex w-full flex-col justify-center gap-4 text-2xl"
             onSubmit={handleSubmit}
             action="submit"
           >
@@ -48,7 +48,7 @@ const Login = () => {
             <input
               value={loginInfo.email}
               onChange={handleChange}
-              className="p-2 border-2 rounded-lg"
+              className="rounded-lg border-2 p-2"
               type="email"
               id="email"
             />
@@ -56,12 +56,12 @@ const Login = () => {
             <input
               value={loginInfo.password}
               onChange={handleChange}
-              className="p-2 border-2 rounded-lg"
+              className="rounded-lg border-2 p-2"
               type="password"
               id="password"
             />
             <button
-              className="bg-emerald-900 p-2 mt-2 rounded-xl text-white text-2xl"
+              className="mt-2 rounded-xl bg-emerald-900 p-2 text-2xl text-white"
               type="submit"
             >
               Login
@@ -69,6 +69,10 @@ const Login = () => {
           </form>
           <Link to="/register" className="text-center text-gray-400 underline">
             Dont have an Account? Click here
+          </Link>
+
+          <Link to="/reset-password" className="text-center text-blue-400">
+            Forgot password
           </Link>
           {invalidLogin && (
             <p className="text-center text-red-500">

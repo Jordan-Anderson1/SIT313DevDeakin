@@ -13,6 +13,7 @@ import LoginAlert from "./routes/LoginAlert";
 import QuestionPage from "./routes/QuestionPage";
 import HiddenQuestionsPage from "./routes/HiddenQuestionsPage";
 import PlansPage from "./routes/PlansPage";
+import ForgotPassword from "./routes/ForgotPassword";
 
 import Success from "./routes/Success";
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/plans" element={<PlansPage />} />
 
           <Route path="/success" element={<Success />} />
+          <Route path="/reset-password" element={<ForgotPassword />} />
         </Routes>
       </AuthContextProvider>
     </>

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import {
   getFirestore,
   doc,
@@ -65,7 +65,7 @@ export const getArticleData = async () => {
       articlesSnapshot.docs.map(async (doc) => {
         const imageUrl = await getArticleImage(doc.id);
         return { ...doc.data(), id: doc.id, imageSource: imageUrl };
-      })
+      }),
     );
     return articles;
   } catch (error) {
@@ -103,7 +103,7 @@ export const addNewArticle = async (
   title,
   abstract,
   text,
-  author
+  author,
 ) => {
   await setDoc(doc(db, "articles", uuid), {
     tags: tags,
@@ -123,7 +123,7 @@ export const addNewQuestion = async (
   description,
   tags,
   author,
-  date
+  date,
 ) => {
   await setDoc(doc(db, "questions", uuid), {
     title: title,
@@ -210,6 +210,14 @@ export const unhideQuestion = async (questionId, userId) => {
 
   try {
     await updateDoc(userRef, { hiddenQuestions: arrayRemove(questionId) });
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+export const resetPassword = async (email) => {
+  try {
+    sendPasswordResetEmail(auth, email);
   } catch (e) {
     console.log(e.message);
   }

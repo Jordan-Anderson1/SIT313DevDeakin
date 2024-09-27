@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "./context/AuthContext";
 import { getFirestoreData } from "./utils/firebase";
+import { PulseLoader } from "react-spinners";
 
 const HeadingImage = () => {
   const { user } = UserAuth();
 
   const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
         try {
+          setLoading(true);
           const data = await getFirestoreData(user.uid);
           setName(data.name);
         } catch (e) {
           console.log(e.message);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -23,16 +28,22 @@ const HeadingImage = () => {
 
   return (
     <>
-      <div className="relative w-full h-[400px]">
+      <div className="relative h-[400px] w-full">
         <img
           src="/headerImage.png"
           alt="code on a screen"
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
         />
 
         {user && (
-          <p className="absolute w-full top-0 h-full flex items-center justify-center text-6xl text-white text-center">
-            Welcome, {name}!
+          <p className="absolute top-0 flex h-full w-full items-center justify-center text-center text-6xl text-white">
+            Welcome,{" "}
+            {loading ? (
+              <PulseLoader color="white" size="40" className="items-end" />
+            ) : (
+              name
+            )}
+            !
           </p>
         )}
         <div className="absolute bottom-0 right-0 bg-gray-500 px-2">

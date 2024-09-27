@@ -39,7 +39,7 @@ const AllQuestionsPage = () => {
           const hiddenQuestions = await getHiddenQuestions(user.uid);
           setHiddenQuestions(hiddenQuestions);
           const visibleQuestions = data.filter(
-            (question) => !hiddenQuestions.includes(question.id)
+            (question) => !hiddenQuestions.includes(question.id),
           );
 
           setQuestions(visibleQuestions);
@@ -71,8 +71,8 @@ const AllQuestionsPage = () => {
     if (filters.tag) {
       updatedQuestions = updatedQuestions.filter((question) =>
         question.tags.some((tag) =>
-          tag.toLowerCase().includes(filters.tag.toLowerCase())
-        )
+          tag.toLowerCase().includes(filters.tag.toLowerCase()),
+        ),
       );
     }
 
@@ -109,19 +109,19 @@ const AllQuestionsPage = () => {
   return (
     <>
       <div
-        className={`text-xl text-center p-4 ${
+        className={`p-4 text-center text-xl ${
           showFilters === true ? "hidden" : null
         }`}
       >
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="bg-emerald-900 p-2 rounded-xl text-white flex ml-auto"
+          className="ml-auto flex rounded-xl bg-emerald-900 p-2 text-white"
         >
           Show filters
         </button>
       </div>
       <div
-        className={`flex gap-12 items-center p-4 text-xl ${
+        className={`flex items-center gap-12 p-4 text-xl ${
           showFilters ? null : "hidden"
         }`}
       >
@@ -133,7 +133,7 @@ const AllQuestionsPage = () => {
             type="text"
             id="tag"
             name="tag"
-            className="border-2 border-gray-400 rounded-xl px-2"
+            className="rounded-xl border-2 border-gray-400 px-2"
             value={filters.tag}
             onChange={(e) => setFilters({ ...filters, tag: e.target.value })}
           />
@@ -146,7 +146,7 @@ const AllQuestionsPage = () => {
           <input
             type="text"
             id="title"
-            className="border-2 border-gray-400 rounded-xl px-2"
+            className="rounded-xl border-2 border-gray-400 px-2"
             value={filters.title}
             onChange={(e) => setFilters({ ...filters, title: e.target.value })}
           />
@@ -157,7 +157,7 @@ const AllQuestionsPage = () => {
             From date:
           </label>
           <input
-            className="border-2 border-gray-400 rounded-xl px-2"
+            className="rounded-xl border-2 border-gray-400 px-2"
             type="date"
             id="fromDate"
             value={filters.date.fromDate}
@@ -170,7 +170,7 @@ const AllQuestionsPage = () => {
             To date:
           </label>
           <input
-            className="border-2 border-gray-400 rounded-xl px-2"
+            className="rounded-xl border-2 border-gray-400 px-2"
             type="date"
             id="toDate"
             value={filters.date.toDate}
@@ -178,7 +178,7 @@ const AllQuestionsPage = () => {
           />
         </div>
 
-        <div className="space-x-2 ml-auto">
+        <div className="ml-auto space-x-2">
           <button
             onClick={() =>
               setFilters({
@@ -187,19 +187,19 @@ const AllQuestionsPage = () => {
                 date: { fromDate: "", toDate: "" },
               })
             }
-            className="border border-emerald-900 p-2 rounded-xl ml-auto"
+            className="ml-auto rounded-xl border border-emerald-900 p-2"
           >
             Clear All
           </button>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className=" bg-emerald-900 rounded-xl p-2 text-white"
+            className="rounded-xl bg-emerald-900 p-2 text-white"
           >
             Hide Filters
           </button>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-4 justify-center w-screen">
+      <div className="grid w-screen justify-center gap-8 p-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filtered
           ? filteredQuestions.map((question, index) => (
               <QuestionPreview
@@ -232,7 +232,7 @@ const AllQuestionsPage = () => {
       <div className="flex justify-center">
         <button
           onClick={() => navigate("/hidden-questions")}
-          className="bg-emerald-900 mb-4 p-2 rounded-xl text-white font-semibold text-xl mt-40"
+          className="mb-4 mt-40 rounded-xl bg-emerald-900 p-2 text-xl font-semibold text-white"
         >
           Click here to see hidden questions
         </button>
